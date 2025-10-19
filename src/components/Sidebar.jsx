@@ -1,27 +1,34 @@
+// Sidebar.jsx
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-function Sidebar() {
+function Sidebar({ isOpen, onClose }) {
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const location = useLocation();
 
   return (
-    <aside className="w-64 h-screen bg-[#161b22] border-r border-[#30363d] fixed left-0 top-0 overflow-y-auto">
+    <aside className={`w-64 h-screen bg-[#161b22] border-r border-[#30363d] fixed left-0 top-0 overflow-y-auto z-30 transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
       <div className="p-6">
-        <Link to="/" className="text-2xl font-bold text-white mb-8 block">
-          <span className="text-[#58a6ff]">&lt;</span>NativeGen<span className="text-[#58a6ff]">/&gt;</span>
-        </Link>
+        <div className="flex items-center justify-between mb-8">
+          <Link to="/" className="text-2xl font-bold text-white">
+            <span className="text-[#58a6ff]">&lt;</span>NativeGen<span className="text-[#58a6ff]">/&gt;</span>
+          </Link>
+          <button onClick={onClose} className="md:hidden text-[#8b949e] hover:text-white">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
 
         <nav className="space-y-2">
-          <Link to="/" className={`flex items-center gap-3 px-4 py-3 rounded-lg ${location.pathname === '/' ? 'bg-[#238636] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition`}>
+          <Link to="/" onClick={onClose} className={`flex items-center gap-3 px-4 py-3 rounded-lg ${location.pathname === '/' ? 'bg-[#238636] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition`}>
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
             </svg>
             Dashboard
           </Link>
 
-          {/* Projects Dropdown */}
           <div>
             <button onClick={() => setProjectsOpen(!projectsOpen)} className="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg text-[#8b949e] hover:bg-[#1c2128] hover:text-white transition">
               <div className="flex items-center gap-3">
@@ -36,16 +43,16 @@ function Sidebar() {
             </button>
             {projectsOpen && (
               <div className="ml-4 mt-1 space-y-1">
-                <Link to="/projects/all" className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/all' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
+                <Link to="/projects/all" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/all' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
                   All Projects
                 </Link>
-                <Link to="/projects/in-progress" className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/in-progress' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
+                <Link to="/projects/in-progress" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/in-progress' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
                   In Progress
                 </Link>
-                <Link to="/projects/completed" className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/completed' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
+                <Link to="/projects/completed" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/completed' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
                   Completed
                 </Link>
-                <Link to="/projects/failed" className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/failed' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
+                <Link to="/projects/failed" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/failed' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
                   Failed
                 </Link>
               </div>
@@ -59,7 +66,6 @@ function Sidebar() {
             New Project
           </a>
 
-          {/* Account Dropdown */}
           <div>
             <button onClick={() => setAccountOpen(!accountOpen)} className="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg text-[#8b949e] hover:bg-[#1c2128] hover:text-white transition">
               <div className="flex items-center gap-3">

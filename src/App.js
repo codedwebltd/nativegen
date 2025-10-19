@@ -1,4 +1,6 @@
+// App.js
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Overview from './components/Overview';
@@ -19,12 +21,22 @@ function Dashboard() {
 }
 
 function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <BrowserRouter>
       <div className="bg-[#0d1117] min-h-screen">
-        <Sidebar />
-        <main className="ml-64">
-          <Header />
+        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        
+        {sidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
+            onClick={() => setSidebarOpen(false)}
+          ></div>
+        )}
+        
+        <main className="md:ml-64">
+          <Header onMenuClick={() => setSidebarOpen(true)} />
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/projects/all" element={<div className="p-4 sm:p-6 lg:p-8"><AllProjects /></div>} />
