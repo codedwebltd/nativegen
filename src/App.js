@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
@@ -8,6 +8,10 @@ import BalanceSection from './components/BalanceSection';
 import ProjectsList from './components/ProjectsList';
 import AllProjects from './pages/AllProjects';
 import Home from './pages/Home/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import PrivateRoute from './components/PrivateRoute';
+import authService from './services/authService';
 
 function Footer() {
   return (
@@ -52,29 +56,41 @@ function App() {
         {/* Home Page (Landing Page) - Main Index */}
         <Route path="/" element={<Home />} />
         
-        {/* Dashboard Routes */}
+        {/* Login Page */}
+        <Route path="/login" element={
+          authService.isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Login />
+        } />
+        
+        {/* Register Page */}
+        <Route path="/register" element={
+          authService.isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Register />
+        } />
+        
+        {/* Dashboard Routes - Protected */}
         <Route path="/dashboard/*" element={
-          <div className="bg-[#0d1117] min-h-screen">
-            <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-            
-            {sidebarOpen && (
-              <div 
-                className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
-                onClick={() => setSidebarOpen(false)}
-              ></div>
-            )}
-            
-            <main className="md:ml-64 flex flex-col min-h-screen">
-              <Header onMenuClick={() => setSidebarOpen(true)} />
-              <div className="flex-1">
-                <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/projects/all" element={<div className="p-4 sm:p-6 lg:p-8"><AllProjects /></div>} />
-                </Routes>
-              </div>
-              <Footer />
-            </main>
-          </div>
+          <PrivateRoute>
+            <div className="bg-[#0d1117] min-h-screen">
+              <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+              
+              {sidebarOpen && (
+                <div 
+                  className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
+                  onClick={() => setSidebarOpen(false)}
+                ></div>
+              )}
+              
+              <main className="md:ml-64 flex flex-col min-h-screen">
+                <Header onMenuClick={() => setSidebarOpen(true)} />
+                <div className="flex-1">
+                  <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="projects/all" element={<div className="p-4 sm:p-6 lg:p-8"><AllProjects /></div>} />
+                  </Routes>
+                </div>
+                <Footer />
+              </main>
+            </div>
+          </PrivateRoute>
         } />
       </Routes>
     </BrowserRouter>

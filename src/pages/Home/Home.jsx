@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import WhyNative from '../../components/WhyNative';
+import LiveCodePreview from '../../components/LiveCodePreview';
+import FAQ from '../../components/FAQ';
 
 
 function Home() {
@@ -252,7 +254,7 @@ function Home() {
 
             {/* Logo */}
             <div className="flex items-center">
-              <a href="#" className="text-xl font-bold text-white hover:text-[#58a6ff]">
+              <a href="/" className="text-xl font-bold text-white hover:text-[#58a6ff]">
                 <span className="text-[#58a6ff]">&lt;</span>NativeGen<span className="text-[#58a6ff]">/&gt;</span>
               </a>
             </div>
@@ -267,9 +269,9 @@ function Home() {
 
             {/* CTA Buttons (Desktop) */}
             <div className="hidden md:flex items-center space-x-4">
-              <a href="#login" className="text-[#c9d1d9] hover:text-white px-4 py-2">
+              <Link to="/login" className="text-[#c9d1d9] hover:text-white px-4 py-2">
                 Login
-              </a>
+              </Link>
               <Link to="/dashboard" className="bg-[#238636] hover:bg-[#2ea043] text-white px-4 py-2 rounded-md font-medium">
                 Start Building
               </Link>
@@ -406,8 +408,14 @@ function Home() {
         </div>
      </section>
 
-      {/* Why Native Section */}
+     {/* Why Native Section */}
       <WhyNative />
+
+      {/* Live Code Preview */}
+      <LiveCodePreview />
+
+      {/* FAQ Section */}
+      <FAQ />
 
       {/* Footer */}
       <footer className="relative mt-20 border-t border-[#30363d] py-12">

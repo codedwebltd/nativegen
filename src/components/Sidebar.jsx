@@ -22,7 +22,7 @@ function Sidebar({ isOpen, onClose }) {
         </div>
 
         <nav className="space-y-2">
-          <Link to="/" onClick={onClose} className={`flex items-center gap-3 px-4 py-3 rounded-lg ${location.pathname === '/' ? 'bg-[#238636] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition`}>
+          <Link to="/dashboard" onClick={onClose} className={`flex items-center gap-3 px-4 py-3 rounded-lg ${location.pathname === '/' ? 'bg-[#238636] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition`}>
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
             </svg>
@@ -43,16 +43,16 @@ function Sidebar({ isOpen, onClose }) {
             </button>
             {projectsOpen && (
               <div className="ml-4 mt-1 space-y-1">
-                <Link to="/projects/all" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/all' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
+                <Link to="/dashboard/projects/all" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/all' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
                   All Projects
                 </Link>
-                <Link to="/projects/in-progress" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/in-progress' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
+                <Link to="/dashboard/projects/in-progress" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/in-progress' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
                   In Progress
                 </Link>
-                <Link to="/projects/completed" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/completed' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
+                <Link to="/dashboard/projects/completed" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/completed' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
                   Completed
                 </Link>
-                <Link to="/projects/failed" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/failed' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
+                <Link to="/dashboard/projects/failed" onClick={onClose} className={`flex items-center gap-3 px-4 py-2 rounded-lg ${location.pathname === '/projects/failed' ? 'bg-[#1c2128] text-white' : 'text-[#8b949e] hover:bg-[#1c2128] hover:text-white'} transition text-sm`}>
                   Failed
                 </Link>
               </div>
