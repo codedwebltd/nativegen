@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Overview from './components/Overview';
@@ -11,7 +11,9 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
+import { DashboardShimmer, FullDashboardShimmer } from './components/Shimmer';
 import authService from './services/authService';
+import CreateProject from './components/CreateProject/CreateProject';
 
 function Footer() {
   return (
@@ -37,6 +39,21 @@ function Footer() {
 }
 
 function Dashboard() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading dashboard data
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 4000); // 1 second shimmer
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <DashboardShimmer />;
+  }
+
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-6">
       <Overview />
@@ -55,30 +72,54 @@ function App() {
       <Routes>
         {/* Home Page (Landing Page) - Main Index */}
         <Route path="/" element={<Home />} />
-        
+
         {/* Login Page */}
         <Route path="/login" element={
           authService.isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Login />
         } />
-        
+
         {/* Register Page */}
         <Route path="/register" element={
           authService.isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Register />
         } />
-        
+
+        {/* Create Project Page - Protected */}
+        <Route path="/create-project" element={
+          <PrivateRoute>
+            <div className="bg-[#0d1117] min-h-screen">
+              <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+              {sidebarOpen && (
+                <div
+                  className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
+                  onClick={() => setSidebarOpen(false)}
+                ></div>
+              )}
+
+              <main className="md:ml-64 flex flex-col min-h-screen">
+                <Header onMenuClick={() => setSidebarOpen(true)} />
+                <div className="flex-1">
+                  <CreateProject />
+                </div>
+                <Footer />
+              </main>
+            </div>
+          </PrivateRoute>
+        } />
+
         {/* Dashboard Routes - Protected */}
         <Route path="/dashboard/*" element={
           <PrivateRoute>
             <div className="bg-[#0d1117] min-h-screen">
               <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-              
+
               {sidebarOpen && (
-                <div 
+                <div
                   className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
                   onClick={() => setSidebarOpen(false)}
                 ></div>
               )}
-              
+
               <main className="md:ml-64 flex flex-col min-h-screen">
                 <Header onMenuClick={() => setSidebarOpen(true)} />
                 <div className="flex-1">

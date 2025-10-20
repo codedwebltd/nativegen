@@ -1,8 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { DashboardShimmer } from '../components/Shimmer';
 
 function AllProjects() {
+  // ALL HOOKS AT THE TOP - BEFORE ANY RETURNS!
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
+
+  useEffect(() => {
+    // Simulate loading - replace with real API call later
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // NOW you can do conditional returns
+  if (loading) {
+    return <DashboardShimmer />;
+  }
+  
 
   const projects = [
     { id: 1, name: 'EcommerceApp', platform: 'Android • Java', description: 'Full e-commerce application with product catalog, cart, and checkout', status: 'completed', icon: '👥', iconBg: 'bg-[#238636]', date: 'Oct 15, 2024' },
