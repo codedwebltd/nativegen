@@ -18,6 +18,7 @@ const authService = {
         // Store token and user data in sessionStorage (more secure)
         sessionStorage.setItem('access_token', data.access_token);
         sessionStorage.setItem('user', JSON.stringify(data.user));
+        sessionStorage.setItem('wallet', JSON.stringify(data.user.wallet));
         return { success: true, data };
       } else {
         return { success: false, message: data.message || 'Login failed' };
@@ -42,6 +43,11 @@ const authService = {
   getUser: () => {
     const user = sessionStorage.getItem('user');
     return user ? JSON.parse(user) : null;
+  },
+
+    getWallet: () => {
+    const wallet = sessionStorage.getItem('wallet');
+    return wallet ? JSON.parse(wallet) : null;
   },
 
   // Get token
