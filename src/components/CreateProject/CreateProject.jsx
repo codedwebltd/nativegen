@@ -230,30 +230,30 @@ function CreateProject() {
     // Progress bar percentage
     const progress = (currentStep / totalSteps) * 100;
 
-    // Calculate pricing
+    // Calculate pricing codedprice
     const calculatePricing = () => {
         let total = 0;
         const breakdown = [];
 
         if (projectData.platforms.includes('android')) {
-            total += 49;
-            breakdown.push({ name: 'Android App', price: 49 });
+            total += 20;
+            breakdown.push({ name: 'Android App', price: 20 });
         }
         if (projectData.platforms.includes('ios')) {
-            total += 79;
-            breakdown.push({ name: 'iOS App', price: 79 });
+            total += 35;
+            breakdown.push({ name: 'iOS App', price: 35 });
         }
         if (projectData.platforms.includes('web')) {
-            total += 39;
-            breakdown.push({ name: 'Web App', price: 39 });
+            total += 15;
+            breakdown.push({ name: 'Web App', price: 15 });
         }
         if (projectData.platforms.includes('desktop')) {
-            total += 59;
-            breakdown.push({ name: 'Desktop App', price: 59 });
+            total += 38;
+            breakdown.push({ name: 'Desktop App', price: 38 });
         }
         if (projectData.platforms.includes('template')) {
-            total += 99;
-            breakdown.push({ name: 'UI/UX Template', price: 99 });
+            total += 10;
+            breakdown.push({ name: 'UI/UX Template', price: 10 });
         }
 
         // Advanced features pricing
@@ -413,86 +413,86 @@ function CreateProject() {
                         </div>
 
                         {/* Navigation Buttons - Mobile Optimized */}
-                       <div className="sticky bottom-0 bg-[#0d1117] py-3 md:py-4 border-t border-[#30363d]">
-  {/* Desktop Layout */}
-  <div className="hidden sm:flex items-center justify-between">
-    <button
-      onClick={goToPrevStep}
-      disabled={currentStep === 1}
-      className="px-4 md:px-6 py-2 md:py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
-    >
-      ← Back
-    </button>
-    
-    <div className="flex items-center gap-2">
-      <button 
-        onClick={() => goToStep(11)}
-        className="px-3 md:px-4 py-2 md:py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-xs md:text-sm flex items-center gap-2"
-      >
-        <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-        </svg>
-        <span className="hidden md:inline">Import</span>
-      </button>
-      <button 
-        onClick={exportProject}
-        className="px-3 md:px-4 py-2 md:py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-xs md:text-sm flex items-center gap-2"
-      >
-        <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-        </svg>
-        <span className="hidden md:inline">Export</span>
-      </button>
-      <button
-        onClick={goToNextStep}
-        disabled={currentStep === totalSteps}
-        className="px-4 md:px-6 py-2 md:py-3 bg-[#238636] hover:bg-[#2ea043] text-white rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
-      >
-        {currentStep === totalSteps ? 'Generate' : 'Next →'}
-      </button>
-    </div>
-  </div>
+                        <div className="sticky bottom-0 bg-[#0d1117] py-3 md:py-4 border-t border-[#30363d]">
+                            {/* Desktop Layout */}
+                            <div className="hidden sm:flex items-center justify-between">
+                                <button
+                                    onClick={goToPrevStep}
+                                    disabled={currentStep === 1}
+                                    className="px-4 md:px-6 py-2 md:py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
+                                >
+                                    ← Back
+                                </button>
 
-  {/* Mobile Layout */}
-  <div className="sm:hidden space-y-2">
-    <div className="flex gap-2">
-      <button
-        onClick={goToPrevStep}
-        disabled={currentStep === 1}
-        className="flex-1 px-4 py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
-      >
-        ← Back
-      </button>
-      <button
-        onClick={goToNextStep}
-        disabled={currentStep === totalSteps}
-        className="flex-1 px-4 py-3 bg-[#238636] hover:bg-[#2ea043] text-white rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-      >
-        {currentStep === totalSteps ? 'Generate' : 'Next →'}
-      </button>
-    </div>
-    <div className="flex gap-2">
-      <button 
-        onClick={() => goToStep(11)}
-        className="flex-1 px-4 py-2 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-xs flex items-center justify-center gap-2"
-      >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-        </svg>
-        Import
-      </button>
-      <button 
-        onClick={exportProject}
-        className="flex-1 px-4 py-2 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-xs flex items-center justify-center gap-2"
-      >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-        </svg>
-        Export
-      </button>
-    </div>
-  </div>
-</div>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        onClick={() => goToStep(11)}
+                                        className="px-3 md:px-4 py-2 md:py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-xs md:text-sm flex items-center gap-2"
+                                    >
+                                        <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                        </svg>
+                                        <span className="hidden md:inline">Import</span>
+                                    </button>
+                                    <button
+                                        onClick={exportProject}
+                                        className="px-3 md:px-4 py-2 md:py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-xs md:text-sm flex items-center gap-2"
+                                    >
+                                        <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                        </svg>
+                                        <span className="hidden md:inline">Export</span>
+                                    </button>
+                                    <button
+                                        onClick={goToNextStep}
+                                        disabled={currentStep === totalSteps}
+                                        className="px-4 md:px-6 py-2 md:py-3 bg-[#238636] hover:bg-[#2ea043] text-white rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
+                                    >
+                                        {currentStep === totalSteps ? 'Generate' : 'Next →'}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Mobile Layout */}
+                            <div className="sm:hidden space-y-2">
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={goToPrevStep}
+                                        disabled={currentStep === 1}
+                                        className="flex-1 px-4 py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+                                    >
+                                        ← Back
+                                    </button>
+                                    <button
+                                        onClick={goToNextStep}
+                                        disabled={currentStep === totalSteps}
+                                        className="flex-1 px-4 py-3 bg-[#238636] hover:bg-[#2ea043] text-white rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                                    >
+                                        {currentStep === totalSteps ? 'Generate' : 'Next →'}
+                                    </button>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => goToStep(11)}
+                                        className="flex-1 px-4 py-2 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-xs flex items-center justify-center gap-2"
+                                    >
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                        </svg>
+                                        Import
+                                    </button>
+                                    <button
+                                        onClick={exportProject}
+                                        className="flex-1 px-4 py-2 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-xs flex items-center justify-center gap-2"
+                                    >
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                        </svg>
+                                        Export
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
 
                     </div>
@@ -715,7 +715,7 @@ function Step1ProjectBasics({ data, updateData }) {
     );
 }
 
-// Step 2: Platform Selection Component
+// Step 2: Platform Selection Component codedweb
 function Step2PlatformSelection({ data, updateData }) {
     const platforms = [
         {
@@ -723,7 +723,7 @@ function Step2PlatformSelection({ data, updateData }) {
             name: 'Android',
             icon: '🤖',
             description: 'Native Java/Kotlin apps',
-            basePrice: 49,
+            basePrice: 20,
             active: true
         },
         {
@@ -731,7 +731,7 @@ function Step2PlatformSelection({ data, updateData }) {
             name: 'iOS',
             icon: '🍎',
             description: 'Native Swift/Obj-C apps',
-            basePrice: 79,
+            basePrice: 35,
             active: true
         },
         {
@@ -739,7 +739,7 @@ function Step2PlatformSelection({ data, updateData }) {
             name: 'Web App',
             icon: '🌐',
             description: 'Laravel/PHP web apps',
-            basePrice: 39,
+            basePrice: 15,
             active: true
         },
         {
@@ -747,7 +747,7 @@ function Step2PlatformSelection({ data, updateData }) {
             name: 'Desktop',
             icon: '💻',
             description: 'Electron/Tauri apps',
-            basePrice: 59,
+            basePrice: 38,
             active: true
         },
         {
@@ -755,7 +755,7 @@ function Step2PlatformSelection({ data, updateData }) {
             name: 'UI/UX Template',
             icon: '🎨',
             description: 'HTML/Tailwind templates',
-            basePrice: 99,
+            basePrice: 10,
             active: true
         }
     ];

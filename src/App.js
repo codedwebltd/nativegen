@@ -14,6 +14,11 @@ import PrivateRoute from './components/PrivateRoute';
 import { DashboardShimmer, FullDashboardShimmer } from './components/Shimmer';
 import authService from './services/authService';
 import CreateProject from './components/CreateProject/CreateProject';
+import AccountSettings from './pages/AccountSettings';
+import APIKeys from './pages/APIKeys';
+import Usage from './pages/Usage';
+import Preferences from './pages/Preferences';
+
 
 function Footer() {
   return (
@@ -108,31 +113,36 @@ function App() {
 } />
 
         {/* Dashboard Routes - Protected */}
-        <Route path="/dashboard/*" element={
-          <PrivateRoute>
-            <div className="bg-[#0d1117] min-h-screen">
-              <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+  <Route path="/dashboard/*" element={
+  <PrivateRoute>
+    <div className="bg-[#0d1117] min-h-screen">
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-              {sidebarOpen && (
-                <div
-                  className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
-                  onClick={() => setSidebarOpen(false)}
-                ></div>
-              )}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        ></div>
+      )}
 
-              <main className="md:ml-64 flex flex-col min-h-screen">
-                <Header onMenuClick={() => setSidebarOpen(true)} />
-                <div className="flex-1">
-                  <Routes>
-                    <Route path="/" element={<Dashboard />} />
-                    <Route path="projects/all" element={<div className="p-4 sm:p-6 lg:p-8"><AllProjects /></div>} />
-                  </Routes>
-                </div>
-                <Footer />
-              </main>
-            </div>
-          </PrivateRoute>
-        } />
+      <main className="md:ml-64 flex flex-col min-h-screen">
+        <Header onMenuClick={() => setSidebarOpen(true)} />
+        <div className="flex-1">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="projects/all" element={<div className="p-4 sm:p-6 lg:p-8"><AllProjects /></div>} />
+            {/* NEW ROUTES */}
+            <Route path="account/settings" element={<div className="p-4 sm:p-6 lg:p-8"><AccountSettings /></div>} />
+            <Route path="account/api-keys" element={<div className="p-4 sm:p-6 lg:p-8"><APIKeys /></div>} />
+            <Route path="account/usage" element={<div className="p-4 sm:p-6 lg:p-8"><Usage /></div>} />
+            <Route path="preferences" element={<div className="p-4 sm:p-6 lg:p-8"><Preferences /></div>} />
+          </Routes>
+        </div>
+        <Footer />
+      </main>
+    </div>
+  </PrivateRoute>
+} />
       </Routes>
     </BrowserRouter>
   );

@@ -3,13 +3,34 @@ import { useState } from 'react';
 // Step 4: App Type & Features Component
 function Step4AppType({ data, updateData }) {
   const appTypes = [
-    {
-      id: 'ecommerce',
-      name: 'E-commerce',
-      icon: '🛒',
-      description: 'Online shopping app',
-      screens: ['Products', 'Cart', 'Checkout', 'Orders', 'Profile']
-    },
+  {
+    id: 'banking',
+    name: 'Banking',
+    icon: '🏦',
+    description: 'Digital banking & mobile money',
+    screens: ['Dashboard', 'Transactions', 'Transfer', 'Bills', 'Cards', 'Airtime', 'Loans', 'Profile']
+  },
+  {
+    id: 'investment',
+    name: 'Investment',
+    icon: '📈',
+    description: 'Portfolio & wealth management',
+    screens: ['Portfolio', 'Markets', 'Trade', 'Watchlist', 'Analytics', 'Deposits', 'Withdrawals', 'Profile']
+  },
+  {
+    id: 'forex',
+    name: 'Forex Trading',
+    icon: '💱',
+    description: 'Currency trading platform',
+    screens: ['LiveChart', 'TradingPanel', 'Orders', 'Positions', 'MarketNews', 'Signals', 'History', 'Account']
+  },
+  {
+    id: 'ecommerce',
+    name: 'E-commerce',
+    icon: '🛒',
+    description: 'Online shopping app',
+    screens: ['Products', 'Cart', 'Checkout', 'Orders', 'Wishlist', 'Profile']
+  },
     {
       id: 'social',
       name: 'Social Media',

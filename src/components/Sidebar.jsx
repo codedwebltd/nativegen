@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import authService from '../services/authService';
 
 function Sidebar({ isOpen, onClose }) {
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const location = useLocation();
+  const userEmail = authService.getUser()?.email || '';
+  const userName = authService.getUser()?.name || 'User';
 
   return (
     <>
@@ -56,30 +59,29 @@ function Sidebar({ isOpen, onClose }) {
               </div>
             </div>
 
-            <div>
-              <div className="px-3 mb-2 text-[10px] font-semibold text-[#6e7681] uppercase tracking-wider">Account</div>
-              <div className="space-y-1">
-                <button onClick={() => setAccountOpen(!accountOpen)} className="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg text-[#8b949e] hover:bg-[#21262d] hover:text-white transition-all">
-                  <div className="flex items-center gap-3">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
-                    <span className="font-medium">Billing & Usage</span>
-                  </div>
-                  <svg className={`w-4 h-4 transition-transform ${accountOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-                </button>
-                <div className={`ml-8 space-y-1 overflow-hidden transition-all ${accountOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <a href="#" className="block px-3 py-2 rounded-lg text-sm text-[#8b949e] hover:text-white transition-all">Billing</a>
-                  <a href="#" className="block px-3 py-2 rounded-lg text-sm text-[#8b949e] hover:text-white transition-all">Usage</a>
-                  <a href="#" className="block px-3 py-2 rounded-lg text-sm text-[#8b949e] hover:text-white transition-all">API Keys</a>
-                </div>
+           <div>
+          <div className="px-3 mb-2 text-[10px] font-semibold text-[#6e7681] uppercase tracking-wider">Account</div>
+          <div className="space-y-1">
+            <button onClick={() => setAccountOpen(!accountOpen)} className="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg text-[#8b949e] hover:bg-[#21262d] hover:text-white transition-all">
+              <div className="flex items-center gap-3">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+                <span className="font-medium">Billing & Usage</span>
               </div>
+              <svg className={`w-4 h-4 transition-transform ${accountOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+            </button>
+            <div className={`ml-8 space-y-1 overflow-hidden transition-all ${accountOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <Link to="/dashboard/account/usage" onClick={onClose} className={`block px-3 py-2 rounded-lg text-sm transition-all ${location.pathname === '/dashboard/account/usage' ? 'text-[#58a6ff] font-medium' : 'text-[#8b949e] hover:text-white'}`}>Usage</Link>
+              <Link to="/dashboard/account/api-keys" onClick={onClose} className={`block px-3 py-2 rounded-lg text-sm transition-all ${location.pathname === '/dashboard/account/api-keys' ? 'text-[#58a6ff] font-medium' : 'text-[#8b949e] hover:text-white'}`}>API Keys</Link>
+              <Link to="/dashboard/account/settings" onClick={onClose} className={`block px-3 py-2 rounded-lg text-sm transition-all ${location.pathname === '/dashboard/account/settings' ? 'text-[#58a6ff] font-medium' : 'text-[#8b949e] hover:text-white'}`}>Settings</Link>
             </div>
-
+          </div>
+        </div>
             <div>
               <div className="px-3 mb-2 text-[10px] font-semibold text-[#6e7681] uppercase tracking-wider">Settings</div>
-              <a href="#" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#8b949e] hover:bg-[#21262d] hover:text-white transition-all">
+               <Link to="/dashboard/account/settings" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#8b949e] hover:bg-[#21262d] hover:text-white transition-all">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                 <span className="font-medium">Preferences</span>
-              </a>
+              </Link>
             </div>
           </nav>
 
@@ -87,8 +89,8 @@ function Sidebar({ isOpen, onClose }) {
             <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#21262d] transition-all cursor-pointer group">
               <div className="w-10 h-10 rounded-full bg-[#238636] flex items-center justify-center text-white font-bold">JD</div>
               <div className="flex-1 min-w-0">
-                <p className="text-white text-sm font-semibold truncate">John Doe</p>
-                <p className="text-[#8b949e] text-xs truncate">john@example.com</p>
+                <p className="text-white text-sm font-semibold truncate">{userName}</p>
+                <p className="text-[#8b949e] text-xs truncate">{userEmail}</p>
               </div>
             </div>
           </div>
