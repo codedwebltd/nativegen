@@ -1149,28 +1149,48 @@ function Step3PlatformConfig({ platforms, configs, appName, updateData }) {
                             <label className="block text-sm font-medium text-[#c9d1d9] mb-2">
                                 Desktop Framework
                             </label>
-                            <div className="grid grid-cols-2 gap-3">
-                                <button
-                                    onClick={() => updateData('configs.desktop.framework', 'electron')}
-                                    className={`px-4 py-3 rounded-lg border-2 transition ${configs.desktop.framework === 'electron'
-                                        ? 'border-[#58a6ff] bg-[#58a6ff]/10 text-white'
-                                        : 'border-[#30363d] text-[#8b949e] hover:border-[#58a6ff]/50'
-                                        }`}
-                                >
-                                    <div className="font-semibold">Electron</div>
-                                    <div className="text-xs mt-1">Cross-Platform</div>
-                                </button>
-                                <button
-                                    onClick={() => updateData('configs.desktop.framework', 'tauri')}
-                                    className={`px-4 py-3 rounded-lg border-2 transition ${configs.desktop.framework === 'tauri'
-                                        ? 'border-[#58a6ff] bg-[#58a6ff]/10 text-white'
-                                        : 'border-[#30363d] text-[#8b949e] hover:border-[#58a6ff]/50'
-                                        }`}
-                                >
-                                    <div className="font-semibold">Tauri</div>
-                                    <div className="text-xs mt-1">Rust-Powered</div>
-                                </button>
-                            </div>
+                         <div className="grid grid-cols-2 gap-3">
+    <button
+        onClick={() => updateData('configs.desktop.framework', 'electron')}
+        className={`px-4 py-3 rounded-lg border-2 transition ${configs.desktop.framework === 'electron'
+            ? 'border-[#58a6ff] bg-[#58a6ff]/10 text-white'
+            : 'border-[#30363d] text-[#8b949e] hover:border-[#58a6ff]/50'
+            }`}
+    >
+        <div className="font-semibold">Electron</div>
+        <div className="text-xs mt-1">Cross-Platform</div>
+    </button>
+    <button
+        onClick={() => updateData('configs.desktop.framework', 'tauri')}
+        className={`px-4 py-3 rounded-lg border-2 transition ${configs.desktop.framework === 'tauri'
+            ? 'border-[#58a6ff] bg-[#58a6ff]/10 text-white'
+            : 'border-[#30363d] text-[#8b949e] hover:border-[#58a6ff]/50'
+            }`}
+    >
+        <div className="font-semibold">Tauri</div>
+        <div className="text-xs mt-1">Rust-Powered</div>
+    </button>
+    <button
+        onClick={() => updateData('configs.desktop.framework', 'javafx')}
+        className={`px-4 py-3 rounded-lg border-2 transition ${configs.desktop.framework === 'javafx'
+            ? 'border-[#58a6ff] bg-[#58a6ff]/10 text-white'
+            : 'border-[#30363d] text-[#8b949e] hover:border-[#58a6ff]/50'
+            }`}
+    >
+        <div className="font-semibold">JavaFX</div>
+        <div className="text-xs mt-1">Java Desktop</div>
+    </button>
+    <button
+        onClick={() => updateData('configs.desktop.framework', 'compose')}
+        className={`px-4 py-3 rounded-lg border-2 transition ${configs.desktop.framework === 'compose'
+            ? 'border-[#58a6ff] bg-[#58a6ff]/10 text-white'
+            : 'border-[#30363d] text-[#8b949e] hover:border-[#58a6ff]/50'
+            }`}
+    >
+        <div className="font-semibold">Compose Desktop</div>
+        <div className="text-xs mt-1">Kotlin Multiplatform</div>
+    </button>
+</div>
                         </div>
 
                         {/* Target Platforms */}

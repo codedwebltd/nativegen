@@ -318,10 +318,10 @@ function Home() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
                 <span>Generate Native <span className={`${platforms[platformIndex].color} transition-colors duration-500`}>{platforms[platformIndex].text}</span> Apps</span>
               </h1>
-              <p className="text-lg sm:text-xl text-[#8b949e] mb-8 max-w-xl mx-auto lg:mx-0">
-                Real Java/Kotlin code. No wrappers. No compromises.
-                Production-ready Android Studio projects you actually own.
-              </p>
+             <p className="text-lg sm:text-xl text-[#8b949e] mb-8 max-w-xl mx-auto lg:mx-0">
+              Real native code. No React Native. No Flutter garbage.
+              Production-ready projects with full source code you actually own.
+            </p>
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

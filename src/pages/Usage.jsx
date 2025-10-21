@@ -90,7 +90,7 @@ function Usage() {
             <p className="text-[#8b949e] text-sm">Professional Plan - $49/month</p>
           </div>
           <button className="px-4 py-2 bg-[#238636] hover:bg-[#2ea043] text-white rounded-lg font-medium text-sm">
-            Upgrade Plan
+            Upgrade
           </button>
         </div>
       </div>
