@@ -84,28 +84,28 @@ function App() {
         } />
 
         {/* Create Project Page - Protected */}
-        <Route path="/create-project" element={
-          <PrivateRoute>
-            <div className="bg-[#0d1117] min-h-screen">
-              <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+    <Route path="/create-project" element={
+  <PrivateRoute>
+    <div className="bg-[#0d1117] min-h-screen">
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-              {sidebarOpen && (
-                <div
-                  className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
-                  onClick={() => setSidebarOpen(false)}
-                ></div>
-              )}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        ></div>
+      )}
 
-              <main className="md:ml-64 flex flex-col min-h-screen">
-                <Header onMenuClick={() => setSidebarOpen(true)} />
-                <div className="flex-1">
-                  <CreateProject />
-                </div>
-                <Footer />
-              </main>
-            </div>
-          </PrivateRoute>
-        } />
+      <main className="md:ml-64 flex flex-col min-h-screen">
+        <Header onMenuClick={() => setSidebarOpen(true)} />
+        <div className="flex-1">
+          <CreateProject />
+        </div>
+        <Footer />
+      </main>
+    </div>
+  </PrivateRoute>
+} />
 
         {/* Dashboard Routes - Protected */}
         <Route path="/dashboard/*" element={
