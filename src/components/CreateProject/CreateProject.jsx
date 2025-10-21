@@ -287,282 +287,307 @@ function CreateProject() {
 
     const pricing = calculatePricing();
 
-    return (
-        <div className="min-h-screen bg-[#0d1117] py-8">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+// REPLACE THE ENTIRE RETURN SECTION IN CreateProject.jsx
+// Find the return statement (around line 280) and replace everything inside it with this:
 
-                <div className="flex gap-6">
-                    {/* Main Content Area */}
-                    <div className="flex-1 max-w-3xl">
-
-                        {/* Progress Bar */}
-                        <div className="mb-8">
-                            <div className="flex items-center justify-between mb-2">
-                                <span className="text-sm text-[#8b949e]">
-                                    Step {currentStep} of {totalSteps}
-                                </span>
-                                <span className="text-sm text-[#8b949e]">
-                                    {Math.round(progress)}% Complete
-                                </span>
-                            </div>
-                            <div className="h-2 bg-[#21262d] rounded-full overflow-hidden">
-                                <div
-                                    className="h-full bg-gradient-to-r from-[#58a6ff] to-[#238636] transition-all duration-300"
-                                    style={{ width: `${progress}%` }}
-                                ></div>
-                            </div>
-                            <h1 className="text-2xl font-bold text-white mt-4">
-                                {stepTitles[currentStep - 1]}
-                            </h1>
-                            <p className="text-[#8b949e] text-sm mt-1">
-                                {currentStep === 1 && "Let's start with the basics of your project"}
-                                {currentStep === 2 && "Choose which platforms you want to target"}
-                                {currentStep === 3 && "Configure platform-specific settings"}
-                                {currentStep === 4 && "Select your app type and features"}
-                                {currentStep === 5 && "Define your database structure"}
-                                {currentStep === 6 && "Optional: Add API integration"}
-                                {currentStep === 7 && "Configure app signing and compilation"}
-                                {currentStep === 8 && "Customize your app's appearance"}
-                                {currentStep === 9 && "Add advanced features (Premium)"}
-                                {currentStep === 10 && "Get AI-powered recommendations"}
-                                {currentStep === 11 && "Import from existing project"}
-                                {currentStep === 12 && "Review and confirm your project"}
-                            </p>
-                        </div>
-
-                        {/* Step Content */}
-                        <div className="mb-8">
-                            {currentStep === 1 && (
-                                <Step1ProjectBasics
-                                    data={projectData.basics}
-                                    updateData={updateData}
-                                />
-                            )}
-                            {currentStep === 2 && (
-                                <Step2PlatformSelection
-                                    data={projectData.platforms}
-                                    updateData={updateData}
-                                />
-                            )}
-
-                            {currentStep === 3 && (
-                                <Step3PlatformConfig
-                                    platforms={projectData.platforms}
-                                    configs={projectData.configs}
-                                    appName={projectData.basics.name}
-                                    updateData={updateData}
-                                />
-                            )}
-                            {currentStep === 4 && (
-                                <Step4AppType
-                                    data={projectData}
-                                    updateData={updateData}
-                                />
-                            )}
-                            {currentStep === 5 && (
-                                <Step5Database
-                                    data={projectData.database}
-                                    updateData={updateData}
-                                />
-                            )}
-                            {currentStep === 6 && (
-                                <Step6API
-                                    data={projectData.api}
-                                    updateData={updateData}
-                                />
-                            )}
-                            {currentStep === 7 && (
-                                <Step7Signing
-                                    data={projectData.signing}
-                                    updateData={updateData}
-                                />
-                            )}
-                            {currentStep === 8 && (
-                                <Step8Theme
-                                    data={projectData.theme}
-                                    updateData={updateData}
-                                />
-                            )}
-                            {currentStep === 9 && (
-                                <Step9Features
-                                    data={projectData.features}
-                                    updateData={updateData}
-                                />
-                            )}
-                            {currentStep === 10 && (
-                                <Step10AI
-                                    projectData={projectData}
-                                    updateData={updateData}
-                                />
-                            )}
-                            {currentStep === 11 && (
-                                <Step11Import
-                                    data={projectData}
-                                    updateData={updateData}
-                                />
-                            )}
-                            {currentStep === 12 && (
-                                <Step12Review
-                                    projectData={projectData}
-                                    pricing={pricing}
-                                    updateData={updateData}
-                                />
-                            )}
-                        </div>
-
-                        {/* Navigation Buttons */}
-                        <div className="flex items-center justify-between sticky bottom-0 bg-[#0d1117] py-4 border-t border-[#30363d]">
-                            <button
-                                onClick={goToPrevStep}
-                                disabled={currentStep === 1}
-                                className="px-6 py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                ← Back
-                            </button>
-
-                   <div className="flex items-center gap-2">
-  <button 
-    onClick={() => setCurrentStep(11)}
-    className="px-4 py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-sm flex items-center gap-2"
-  >
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-    </svg>
-    Import
-  </button>
-  <button 
-    onClick={exportProject}
-    className="px-4 py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-sm flex items-center gap-2"
-  >
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-    </svg>
-    Export
-  </button>
-  <button
-    onClick={goToNextStep}
-    disabled={currentStep === totalSteps}
-    className="px-6 py-3 bg-[#238636] hover:bg-[#2ea043] text-white rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
-  >
-    {currentStep === totalSteps ? 'Generate Project' : 'Next →'}
-  </button>
-</div>
-                        </div>
-                    </div>
-
-                    {/* BATCH 1 ENDS HERE - Right Sidebar will be in BATCH 2 */}
-                    {/* Right Sidebar - Pricing & Summary */}
-                    <div className="hidden lg:block w-80 flex-shrink-0">
-                        <div className="sticky top-8 space-y-4">
-
-                            {/* Pricing Card */}
-                            <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-6">
-                                <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                                    <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    Project Cost
-                                </h3>
-
-                                <div className="space-y-3 mb-4">
-                                    {pricing.breakdown.length > 0 ? (
-                                        <>
-                                            {pricing.breakdown.map((item, idx) => (
-                                                <div key={idx} className="flex items-center justify-between text-sm">
-                                                    <span className="text-[#8b949e]">{item.name}</span>
-                                                    <span className="text-[#22c55e] font-medium">${item.price}</span>
-                                                </div>
-                                            ))}
-                                        </>
-                                    ) : (
-                                        <div className="text-center py-4">
-                                            <p className="text-xs text-[#6e7681]">Select platforms to see pricing</p>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {pricing.breakdown.length > 0 && (
-                                    <>
-                                        <div className="border-t border-[#30363d] pt-3 mb-3">
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-white font-semibold">Total</span>
-                                                <span className="text-[#22c55e] font-bold text-xl">
-                                                    ${pricing.total}
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <div className="text-xs text-[#6e7681] space-y-1">
-                                            <p>✓ Full source code</p>
-                                            <p>✓ 7-day preview</p>
-                                            <p>✓ Free updates (30 days)</p>
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-
-                            {/* Progress Summary Card */}
-                            <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-6">
-                                <h3 className="text-sm font-semibold text-white mb-4">Configuration Progress</h3>
-
-                                <div className="space-y-3">
-                                    {[
-                                        { step: 1, label: 'Project basics', completed: projectData.basics.name },
-                                        { step: 2, label: 'Platform selection', completed: projectData.platforms.length > 0 },
-                                        { step: 3, label: 'Configuration', completed: currentStep > 3 },
-                                        { step: 4, label: 'App type & features', completed: projectData.appType },
-                                        { step: 5, label: 'Database setup', completed: currentStep > 5 },
-                                        { step: 6, label: 'API integration', completed: currentStep > 6 },
-                                    ].map(item => (
-                                        <div key={item.step} className="flex items-center gap-3">
-                                            <div className={`w-6 h-6 rounded-full flex items-center justify-center ${item.completed ? 'bg-[#22c55e]' : 'bg-[#21262d]'
-                                                }`}>
-                                                {item.completed ? (
-                                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                                                    </svg>
-                                                ) : (
-                                                    <span className="text-xs text-[#6e7681]">{item.step}</span>
-                                                )}
-                                            </div>
-                                            <span className={`text-sm ${item.completed ? 'text-white' : 'text-[#8b949e]'}`}>
-                                                {item.label}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Quick Tips Card */}
-                            <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-6">
-                                <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                                    <svg className="w-4 h-4 text-[#58a6ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    Quick Tip
-                                </h3>
-                                <p className="text-xs text-[#8b949e] leading-relaxed">
-                                    {currentStep === 1 && "Choose a clear, memorable name. This will be used to generate package names."}
-                                    {currentStep === 2 && "You can select multiple platforms. Each platform has its own base price."}
-                                    {currentStep === 3 && "Platform configurations will be auto-filled based on your project name."}
-                                    {currentStep === 4 && "Select an app type to get pre-configured screens and features."}
-                                    {currentStep === 5 && "Database entities define your app's data structure."}
-                                    {currentStep === 6 && "API integration is optional but recommended for dynamic apps."}
-                                    {currentStep === 7 && "We can auto-generate signing certificates for you."}
-                                    {currentStep === 8 && "Choose colors that match your brand identity."}
-                                    {currentStep === 9 && "Premium features add extra functionality to your app."}
-                                    {currentStep === 10 && "Our AI analyzes your project and suggests improvements."}
-                                    {currentStep === 11 && "Import existing projects to continue where you left off."}
-                                    {currentStep === 12 && "Review everything before generating your project."}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+return (
+  <div className="min-h-screen bg-[#0d1117] py-4 md:py-8">
+    <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+      
+      <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
+        {/* Main Content Area */}
+        <div className="flex-1 w-full lg:max-w-3xl">
+          
+          {/* Progress Bar */}
+          <div className="mb-6 md:mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-1">
+              <span className="text-xs sm:text-sm text-[#8b949e]">
+                Step {currentStep} of {totalSteps}
+              </span>
+              <span className="text-xs sm:text-sm text-[#8b949e]">
+                {Math.round(progress)}% Complete
+              </span>
             </div>
+            <div className="h-2 bg-[#21262d] rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-[#58a6ff] to-[#238636] transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
+            <h1 className="text-xl sm:text-2xl font-bold text-white mt-3 md:mt-4">
+              {stepTitles[currentStep - 1]}
+            </h1>
+            <p className="text-[#8b949e] text-xs sm:text-sm mt-1">
+              {currentStep === 1 && "Let's start with the basics of your project"}
+              {currentStep === 2 && "Choose which platforms you want to target"}
+              {currentStep === 3 && "Configure platform-specific settings"}
+              {currentStep === 4 && "Select your app type and features"}
+              {currentStep === 5 && "Define your database structure"}
+              {currentStep === 6 && "Optional: Add API integration"}
+              {currentStep === 7 && "Configure app signing and compilation"}
+              {currentStep === 8 && "Customize your app's appearance"}
+              {currentStep === 9 && "Add advanced features (Premium)"}
+              {currentStep === 10 && "Get AI-powered recommendations"}
+              {currentStep === 11 && "Import from existing project"}
+              {currentStep === 12 && "Review and confirm your project"}
+            </p>
+          </div>
+
+          {/* Step Content */}
+          <div className="mb-6 md:mb-8">
+            {currentStep === 1 && (
+              <Step1ProjectBasics 
+                data={projectData.basics}
+                updateData={updateData}
+              />
+            )}
+            {currentStep === 2 && (
+              <Step2PlatformSelection 
+                data={projectData.platforms}
+                updateData={updateData}
+              />
+            )}
+            {currentStep === 3 && (
+              <Step3PlatformConfig 
+                platforms={projectData.platforms}
+                configs={projectData.configs}
+                appName={projectData.basics.name}
+                updateData={updateData}
+              />
+            )}
+            {currentStep === 4 && (
+              <Step4AppType 
+                data={projectData}
+                updateData={updateData}
+              />
+            )}
+            {currentStep === 5 && (
+              <Step5Database 
+                data={projectData.database}
+                updateData={updateData}
+              />
+            )}
+            {currentStep === 6 && (
+              <Step6API 
+                data={projectData.api}
+                updateData={updateData}
+              />
+            )}
+            {currentStep === 7 && (
+              <Step7Signing 
+                data={projectData.signing}
+                updateData={updateData}
+              />
+            )}
+            {currentStep === 8 && (
+              <Step8Theme 
+                data={projectData.theme}
+                updateData={updateData}
+              />
+            )}
+            {currentStep === 9 && (
+              <Step9Features 
+                data={projectData.features}
+                updateData={updateData}
+              />
+            )}
+            {currentStep === 10 && (
+              <Step10AI 
+                projectData={projectData}
+                updateData={updateData}
+              />
+            )}
+            {currentStep === 11 && (
+              <Step11Import 
+                data={projectData}
+                updateData={updateData}
+              />
+            )}
+            {currentStep === 12 && (
+              <Step12Review 
+                projectData={projectData}
+                pricing={pricing}
+                updateData={updateData}
+              />
+            )}
+          </div>
+
+          {/* Navigation Buttons - Mobile Optimized */}
+          <div className="sticky bottom-0 bg-[#0d1117] py-3 md:py-4 border-t border-[#30363d]">
+            {/* Desktop Layout */}
+            <div className="hidden sm:flex items-center justify-between">
+              <button
+                onClick={goToPrevStep}
+                disabled={currentStep === 1}
+                className="px-4 md:px-6 py-2 md:py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
+              >
+                ← Back
+              </button>
+              
+              <div className="flex items-center gap-2">
+                <button 
+                  onClick={exportProject}
+                  className="px-3 md:px-4 py-2 md:py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-xs md:text-sm flex items-center gap-2"
+                >
+                  <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                  </svg>
+                  <span className="hidden md:inline">Export</span>
+                </button>
+                <button
+                  onClick={goToNextStep}
+                  disabled={currentStep === totalSteps}
+                  className="px-4 md:px-6 py-2 md:py-3 bg-[#238636] hover:bg-[#2ea043] text-white rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
+                >
+                  {currentStep === totalSteps ? 'Generate' : 'Next →'}
+                </button>
+              </div>
+            </div>
+
+            {/* Mobile Layout */}
+            <div className="sm:hidden space-y-2">
+              <div className="flex gap-2">
+                <button
+                  onClick={goToPrevStep}
+                  disabled={currentStep === 1}
+                  className="flex-1 px-4 py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+                >
+                  ← Back
+                </button>
+                <button
+                  onClick={goToNextStep}
+                  disabled={currentStep === totalSteps}
+                  className="flex-1 px-4 py-3 bg-[#238636] hover:bg-[#2ea043] text-white rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                >
+                  {currentStep === totalSteps ? 'Generate' : 'Next →'}
+                </button>
+              </div>
+              <button 
+                onClick={exportProject}
+                className="w-full px-4 py-2 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-xs flex items-center justify-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                Export Project
+              </button>
+            </div>
+          </div>
         </div>
-    );
+
+        {/* Right Sidebar - Hide on Mobile */}
+        <div className="hidden lg:block w-80 flex-shrink-0">
+          <div className="sticky top-8 space-y-4">
+            
+            {/* Pricing Card */}
+            <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-6">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Project Cost
+              </h3>
+              
+              <div className="space-y-3 mb-4">
+                {pricing.breakdown.length > 0 ? (
+                  <>
+                    {pricing.breakdown.map((item, idx) => (
+                      <div key={idx} className="flex items-center justify-between text-sm">
+                        <span className="text-[#8b949e]">{item.name}</span>
+                        <span className="text-[#22c55e] font-medium">${item.price}</span>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <div className="text-center py-4">
+                    <p className="text-xs text-[#6e7681]">Select platforms to see pricing</p>
+                  </div>
+                )}
+              </div>
+              
+              {pricing.breakdown.length > 0 && (
+                <>
+                  <div className="border-t border-[#30363d] pt-3 mb-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-white font-semibold">Total</span>
+                      <span className="text-[#22c55e] font-bold text-xl">
+                        ${pricing.total}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="text-xs text-[#6e7681] space-y-1">
+                    <p>✓ Full source code</p>
+                    <p>✓ 7-day preview</p>
+                    <p>✓ Free updates (30 days)</p>
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* Progress Summary Card */}
+            <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-6">
+              <h3 className="text-sm font-semibold text-white mb-4">Configuration Progress</h3>
+              
+              <div className="space-y-3">
+                {[
+                  { step: 1, label: 'Project basics', completed: projectData.basics.name },
+                  { step: 2, label: 'Platform selection', completed: projectData.platforms.length > 0 },
+                  { step: 3, label: 'Configuration', completed: currentStep > 3 },
+                  { step: 4, label: 'App type & features', completed: projectData.appType },
+                  { step: 5, label: 'Database setup', completed: currentStep > 5 },
+                  { step: 6, label: 'API integration', completed: currentStep > 6 },
+                ].map(item => (
+                  <div key={item.step} className="flex items-center gap-3">
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                      item.completed ? 'bg-[#22c55e]' : 'bg-[#21262d]'
+                    }`}>
+                      {item.completed ? (
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                      ) : (
+                        <span className="text-xs text-[#6e7681]">{item.step}</span>
+                      )}
+                    </div>
+                    <span className={`text-sm ${item.completed ? 'text-white' : 'text-[#8b949e]'}`}>
+                      {item.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Tips Card */}
+            <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-6">
+              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                <svg className="w-4 h-4 text-[#58a6ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Quick Tip
+              </h3>
+              <p className="text-xs text-[#8b949e] leading-relaxed">
+                {currentStep === 1 && "Choose a clear, memorable name. This will be used to generate package names."}
+                {currentStep === 2 && "You can select multiple platforms. Each platform has its own base price."}
+                {currentStep === 3 && "Platform configurations will be auto-filled based on your project name."}
+                {currentStep === 4 && "Select an app type to get pre-configured screens and features."}
+                {currentStep === 5 && "Database entities define your app's data structure."}
+                {currentStep === 6 && "API integration is optional but recommended for dynamic apps."}
+                {currentStep === 7 && "We can auto-generate signing certificates for you."}
+                {currentStep === 8 && "Choose colors that match your brand identity."}
+                {currentStep === 9 && "Premium features add extra functionality to your app."}
+                {currentStep === 10 && "Our AI analyzes your project and suggests improvements."}
+                {currentStep === 11 && "Import existing projects to continue where you left off."}
+                {currentStep === 12 && "Review everything before generating your project."}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+);
 }
 // BATCH 2 ENDS HERE - Step Components will be in BATCH 3
 // BATCH 3 - Step 1 & Step 2 Components
