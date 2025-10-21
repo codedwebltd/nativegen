@@ -7,18 +7,18 @@ function AllProjects() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
 
-  useEffect(() => {
-    // Simulate loading - replace with real API call later
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   // Simulate loading - replace with real API call later
+  //   const timer = setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
-  // NOW you can do conditional returns
-  if (loading) {
-    return <DashboardShimmer />;
-  }
+  // // NOW you can do conditional returns
+  // if (loading) {
+  //   return <DashboardShimmer />;
+  // }
   
 
   const projects = [
