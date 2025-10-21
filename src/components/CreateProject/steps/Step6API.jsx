@@ -2,6 +2,17 @@ import { useState } from 'react';
 
 // Step 6: API Integration Component
 function Step6API({ data, updateData }) {
+  const [uploadedDocs, setUploadedDocs] = useState(null);
+
+  const handleDocsUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setUploadedDocs(file);
+      // You can also update the data if needed
+      // updateData('api.docsFile', file.name);
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Enable API Toggle */}
@@ -35,20 +46,23 @@ function Step6API({ data, updateData }) {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div
-                onClick={() => updateData('api.option', 'manual')}
+                onClick={() => {
+                  updateData('api.option', 'manual');
+                  updateData('api.createApi', false);
+                }}
                 className={`p-4 rounded-xl border-2 cursor-pointer transition ${
-                  data.option === 'manual'
+                  data.option === 'manual' && !data.createApi
                     ? 'border-[#58a6ff] bg-[#58a6ff]/10'
                     : 'border-[#30363d] hover:border-[#58a6ff]/50'
                 }`}
               >
                 <div className="flex items-start gap-3 mb-3">
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center mt-0.5 ${
-                    data.option === 'manual'
+                    data.option === 'manual' && !data.createApi
                       ? 'bg-[#58a6ff] border-[#58a6ff]'
                       : 'border-[#30363d]'
                   }`}>
-                    {data.option === 'manual' && (
+                    {data.option === 'manual' && !data.createApi && (
                       <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
                       </svg>
@@ -70,7 +84,10 @@ function Step6API({ data, updateData }) {
               </div>
 
               <div
-                onClick={() => updateData('api.createApi', !data.createApi)}
+                onClick={() => {
+                  updateData('api.createApi', true);
+                  updateData('api.option', 'manual');
+                }}
                 className={`p-4 rounded-xl border-2 cursor-pointer transition ${
                   data.createApi
                     ? 'border-[#238636] bg-[#238636]/10'
@@ -107,7 +124,7 @@ function Step6API({ data, updateData }) {
           </div>
 
           {/* Manual API Integration */}
-          {data.option === 'manual' && (
+          {data.option === 'manual' && !data.createApi && (
             <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-6">
               <h3 className="text-lg font-semibold text-white mb-4">API Details</h3>
 
@@ -182,29 +199,55 @@ function Step6API({ data, updateData }) {
                   <label className="block text-sm font-medium text-[#c9d1d9] mb-2">
                     Upload API Documentation <span className="text-[#8b949e]">(Optional)</span>
                   </label>
-                  <div className="border-2 border-dashed border-[#30363d] rounded-lg p-6 text-center hover:border-[#58a6ff]/50 transition">
-                    <input
-                      type="file"
-                      accept=".pdf,.json,.yaml,.yml,.txt,.md"
-                      onChange={(e) => {
-                        // Handle file upload
-                        console.log('File:', e.target.files[0]);
-                      }}
-                      className="hidden"
-                      id="api-docs-upload"
-                    />
-                    <label htmlFor="api-docs-upload" className="cursor-pointer">
-                      <svg className="w-10 h-10 text-[#6e7681] mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                      </svg>
-                      <p className="text-sm text-white mb-1">
-                        Click to upload or drag and drop
-                      </p>
-                      <p className="text-xs text-[#8b949e]">
-                        PDF, JSON, YAML, TXT, or Markdown files
-                      </p>
-                    </label>
-                  </div>
+                  
+                  {!uploadedDocs ? (
+                    <div className="border-2 border-dashed border-[#30363d] rounded-lg p-6 text-center hover:border-[#58a6ff]/50 transition">
+                      <input
+                        type="file"
+                        accept=".pdf,.json,.yaml,.yml,.txt,.md"
+                        onChange={handleDocsUpload}
+                        className="hidden"
+                        id="api-docs-upload"
+                      />
+                      <label htmlFor="api-docs-upload" className="cursor-pointer">
+                        <svg className="w-10 h-10 text-[#6e7681] mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                        <p className="text-sm text-white mb-1">
+                          Click to upload or drag and drop
+                        </p>
+                        <p className="text-xs text-[#8b949e]">
+                          PDF, JSON, YAML, TXT, or Markdown files
+                        </p>
+                      </label>
+                    </div>
+                  ) : (
+                    <div className="bg-[#0d1117] border border-[#30363d] rounded-lg p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-[#58a6ff]/10 rounded-lg flex items-center justify-center">
+                            <svg className="w-5 h-5 text-[#58a6ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="text-white font-medium text-sm">{uploadedDocs.name}</p>
+                            <p className="text-xs text-[#8b949e]">
+                              {(uploadedDocs.size / 1024).toFixed(2)} KB
+                            </p>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => setUploadedDocs(null)}
+                          className="text-[#ef4444] hover:text-[#f87171] transition"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

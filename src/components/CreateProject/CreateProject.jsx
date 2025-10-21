@@ -144,7 +144,7 @@ function CreateProject() {
             const sanitized = projectData.basics.name
                 .toLowerCase()
                 .replace(/[^a-z0-9]/g, '');
-            const packageName = `com.user.${sanitized}`;
+            const packageName = `com.nativegen.${sanitized}`;
             setProjectData(prev => ({
                 ...prev,
                 configs: {
@@ -161,7 +161,7 @@ function CreateProject() {
             const sanitized = projectData.basics.name
                 .toLowerCase()
                 .replace(/[^a-z0-9]/g, '');
-            const bundleId = `com.user.${sanitized}`;
+            const bundleId = `com.nativegen.${sanitized}`;
             setProjectData(prev => ({
                 ...prev,
                 configs: {
@@ -420,23 +420,33 @@ function CreateProject() {
                                 ← Back
                             </button>
 
-                            <div className="flex items-center gap-2">
-                                <button
-                                    onClick={() => {
-                                        alert('Draft saved successfully!');
-                                    }}
-                                    className="px-4 py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-sm"
-                                >
-                                    Save Draft
-                                </button>
-                                <button
-                                    onClick={goToNextStep}
-                                    disabled={currentStep === totalSteps}
-                                    className="px-6 py-3 bg-[#238636] hover:bg-[#2ea043] text-white rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    {currentStep === totalSteps ? 'Generate Project' : 'Next →'}
-                                </button>
-                            </div>
+                   <div className="flex items-center gap-2">
+  <button 
+    onClick={() => setCurrentStep(11)}
+    className="px-4 py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-sm flex items-center gap-2"
+  >
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+    </svg>
+    Import
+  </button>
+  <button 
+    onClick={exportProject}
+    className="px-4 py-3 border border-[#30363d] rounded-lg text-[#c9d1d9] hover:border-[#58a6ff] hover:text-white transition text-sm flex items-center gap-2"
+  >
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+    </svg>
+    Export
+  </button>
+  <button
+    onClick={goToNextStep}
+    disabled={currentStep === totalSteps}
+    className="px-6 py-3 bg-[#238636] hover:bg-[#2ea043] text-white rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
+  >
+    {currentStep === totalSteps ? 'Generate Project' : 'Next →'}
+  </button>
+</div>
                         </div>
                     </div>
 
@@ -1221,5 +1231,25 @@ function Step3PlatformConfig({ platforms, configs, appName, updateData }) {
     );
 }
 
+
 // BATCH 5 ENDS HERE - Export statement will be in BATCH 6
+const exportProject = () => {
+  const saved = sessionStorage.getItem('nativegen_project_draft');
+  if (!saved) {
+    alert('No project to export. Please configure your project first.');
+    return;
+  }
+
+  // Create blob and download
+  const blob = new Blob([saved], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+const parsed = JSON.parse(saved);
+a.download = `nativegen-project-${parsed.data?.basics?.name || 'untitled'}-${Date.now()}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
 export default CreateProject;
